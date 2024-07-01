@@ -1,9 +1,11 @@
 package com.nageoffer.shortlink.admin.dao.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.nageoffer.shortlink.admin.common.database.BaseDo;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-
-import java.util.Date;
+import lombok.NoArgsConstructor;
 
 
 /**
@@ -11,13 +13,14 @@ import java.util.Date;
  */
 @Data
 @TableName("t_group")
-public class GroupDO {
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GroupDO extends BaseDo {
     private Long id;
     private String gid;
     private String username;
     private String name;
-    private Date createTime;
-    private Date updateTime;
-    private Integer delFlag;
+
 
 }
