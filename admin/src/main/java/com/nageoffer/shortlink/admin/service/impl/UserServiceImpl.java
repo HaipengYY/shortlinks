@@ -112,7 +112,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserDO> implements 
         String uuid = UUID.randomUUID().toString();
         stringRedisTemplate.opsForHash().put(loginKey, "token", uuid);
         stringRedisTemplate.opsForHash().put(loginKey, "user", JSON.toJSONString(userDO));
-        stringRedisTemplate.expire(loginKey, 30L, TimeUnit.MINUTES);
+        stringRedisTemplate.expire(loginKey, 30L, TimeUnit.DAYS);
 
         // 打印日志
         System.out.println("登录成功，存储的Key: " + loginKey + ", 存储的token: " + uuid);
