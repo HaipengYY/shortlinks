@@ -1,5 +1,6 @@
 package com.nageoffer.shortlink.admin.common.biz.user;
 
+import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,9 @@ public class UserTransmitFilter implements Filter {
         if(!uri.equals("/api/shortlink/v1/user/login")){
             String username = httpServletRequest.getHeader("username");
             String token = httpServletRequest.getHeader("token");
-            Object userInfoJsonStr = stringRedisTemplate.opsForHash().get("login_"+ username,token);
+            Object userInfoJsonStr = stringRedisTemplate.opsForHash().get("login_"+ username,"user");
             if(userInfoJsonStr!=null){
-                UserInfoDTO userInfoDTO = com.alibaba.fastjson2.JSON.parseObject(userInfoJsonStr.toString(),UserInfoDTO.class);
+                UserInfoDTO userInfoDTO = JSON.parseObject(userInfoJsonStr.toString(),UserInfoDTO.class);
                 UserContext.setUser(userInfoDTO);
         }
 
