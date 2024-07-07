@@ -22,7 +22,7 @@ public class UserController {
     /**
      * Get a user by their username
      */
-    @GetMapping(value = "/api/shortlink/v1/user/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/shortlink/admin/v1/user/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {
 
         return Results.success(userService.getUserByUserName(username));
@@ -30,18 +30,18 @@ public class UserController {
     /**
      * Get real user information by their username
      */
-    @GetMapping(value = "/api/shortlink/v1/actual/user/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/api/shortlink/admin/v1/actual/user/{username}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Result<RealUserRespDTO> getRealUserByUsername(@PathVariable("username") String username) {
 
         return Results.success(BeanUtil.toBean(userService.getUserByUserName(username), RealUserRespDTO.class));
     }
 
-    @GetMapping("/api/shortlink/v1/user/has-username")
+    @GetMapping("/api/shortlink/admin/v1/user/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") String username){
         return Results.success(userService.hasUsername(username));
     }
 
-    @PostMapping ("/api/shortlink/v1/user")
+    @PostMapping ("/api/shortlink/admin/v1/user")
     public Result<Void> register(@RequestBody UserRegisterReqDTO requestParam){
         userService.register(requestParam);
         return Results.success();
@@ -52,7 +52,7 @@ public class UserController {
      * @param requestParam
      * @return
      */
-    @PutMapping ("/api/shortlink/v1/user")
+    @PutMapping ("/api/shortlink/admin/v1/user")
     public Result<Void> register(@RequestBody UserUpdateReqDTO requestParam){
         userService.update(requestParam);
         return Results.success();
@@ -61,13 +61,13 @@ public class UserController {
     /**
      * 用户登录
      */
-    @PostMapping ("/api/shortlink/v1/user/login")
+    @PostMapping ("/api/shortlink/admin/v1/user/login")
     public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam){
         UserLoginRespDTO result = userService.login(requestParam);
         return Results.success(result);
     }
 
-    @GetMapping("/api/shortlink/v1/user/check-login")
+    @GetMapping("/api/shortlink/admin/v1/user/check-login")
     public Result<Boolean> checklogin(@RequestParam("username") String username, @RequestParam("token") String token){
         return Results.success(userService.checkLogin(username,token));
 
@@ -79,7 +79,7 @@ public class UserController {
      * @param token
      * @return
      */
-    @DeleteMapping("/api/shortlink/v1/user/logout")
+    @DeleteMapping("/api/shortlink/admin/v1/user/logout")
     public Result<Void> logout(@RequestParam("username") String username, @RequestParam("token") String token){
         return Results.success(userService.logout(username,token));
     }
