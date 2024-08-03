@@ -50,5 +50,11 @@ public class ShortLinkDO extends BaseDo {
 
     private String description;
 
+    /**
+     * 网站标识
+     */
+
+    private String favicon;
+
 
 }
